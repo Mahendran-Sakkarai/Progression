@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Progression</string>
     <string name="action_settings">Settings</string>
+    <string name="welcome_message">Welcome to Progression!</string>
+    <string name="description">A Custom Progress Loader</string>
+    <string name="show_loader1">Show Loader 1</string>
+    <string name="show_loader2">Show Loader 2</string>
 </resources>
