@@ -1,5 +1,6 @@
 package com.yaiyaiyaa.progression;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -44,10 +45,12 @@ public class AnimationsContainer {
 
     // single instance procedures
     private static AnimationsContainer sInstance;
+    private static Context mContext;
 
-    public static AnimationsContainer getInstance(ImageView imageView) {
+    public static AnimationsContainer getInstance(ImageView imageView, Context context) {
         if (sInstance == null)
             sInstance = new AnimationsContainer(imageView);
+        mContext = context;
         return sInstance;
     }
 
@@ -216,7 +219,7 @@ public class AnimationsContainer {
 
         @Override
         protected Drawable doInBackground(Integer... params) {
-            return ProgressionApplication.getContext().getResources().getDrawable(params[0]);
+            return mContext.getResources().getDrawable(params[0]);
         }
 
         @Override
