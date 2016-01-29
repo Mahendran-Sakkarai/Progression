@@ -11,7 +11,7 @@ import android.widget.ImageView;
  */
 public class Progression extends ProgressDialog {
     private int mLoader;
-    private AnimationDrawable animateLoader;
+    private AnimationsContainer mFasterAnimationsContainer;
 
     public static ProgressDialog initProgression(Context context, int loader) {
         Progression progression = new Progression(context, R.style.ProgressionTheme, loader);
@@ -38,25 +38,29 @@ public class Progression extends ProgressDialog {
         ImageView loaderContainer = (ImageView) findViewById(R.id.loader_image);
 
         if (mLoader == 1) {
-            loaderContainer.setBackgroundResource(R.drawable.loader1);
-            animateLoader = (AnimationDrawable) loaderContainer.getBackground();
+            mFasterAnimationsContainer = AnimationsContainer
+                    .getInstance(loaderContainer);
+            mFasterAnimationsContainer.addAllFrames(AppUtils.progress1,
+                    AppUtils.ANIMATION_INTERVAL);
         } else if (mLoader == 2) {
-            loaderContainer.setBackgroundResource(R.drawable.loader2);
-            animateLoader = (AnimationDrawable) loaderContainer.getBackground();
+            mFasterAnimationsContainer = AnimationsContainer
+                    .getInstance(loaderContainer);
+            mFasterAnimationsContainer.addAllFrames(AppUtils.progress2,
+                    AppUtils.ANIMATION_INTERVAL);
         }
     }
 
     @Override
     public void show() {
         super.show();
-        if (animateLoader != null)
-            animateLoader.start();
+        if (mFasterAnimationsContainer != null)
+            mFasterAnimationsContainer.start();
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
-        if (animateLoader != null)
-            animateLoader.stop();
+        if (mFasterAnimationsContainer != null)
+            mFasterAnimationsContainer.stop();
     }
 }
