@@ -41,4 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/show_loader2"/>
+
+    <Button
+        android:id="@+id/show_loader3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/show_loader3"/>
 </LinearLayout>

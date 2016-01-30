@@ -5,4 +5,5 @@
     <string name="description">A Custom Progress Loader</string>
     <string name="show_loader1">Show Loader 1</string>
     <string name="show_loader2">Show Loader 2</string>
+    <string name="show_loader3">Show Loader 3</string>
 </resources>

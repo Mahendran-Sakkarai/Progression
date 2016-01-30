@@ -10,9 +10,8 @@ import android.widget.ImageView;
  * Created by mahendran on 28/12/15.
  */
 public class Progression extends ProgressDialog {
-    private final Context mContext;
     private int mLoader;
-    private AnimationsContainer mFasterAnimationsContainer;
+    private AnimationDrawable animateLoader;
 
     public static ProgressDialog initProgression(Context context, int loader) {
         Progression progression = new Progression(context, R.style.ProgressionTheme, loader);
@@ -24,13 +23,11 @@ public class Progression extends ProgressDialog {
 
     public Progression(Context context) {
         super(context);
-        this.mContext = context;
     }
 
     public Progression(Context context, int theme, int loader) {
         super(context, theme);
         this.mLoader = loader;
-        this.mContext = context;
     }
 
     @Override
@@ -41,29 +38,28 @@ public class Progression extends ProgressDialog {
         ImageView loaderContainer = (ImageView) findViewById(R.id.loader_image);
 
         if (mLoader == 1) {
-            mFasterAnimationsContainer = AnimationsContainer
-                    .getInstance(loaderContainer, mContext);
-            mFasterAnimationsContainer.addAllFrames(AppUtils.progress1,
-                    AppUtils.ANIMATION_INTERVAL);
+            loaderContainer.setBackgroundResource(R.drawable.loader1);
+            animateLoader = (AnimationDrawable) loaderContainer.getBackground();
         } else if (mLoader == 2) {
-            mFasterAnimationsContainer = AnimationsContainer
-                    .getInstance(loaderContainer, mContext);
-            mFasterAnimationsContainer.addAllFrames(AppUtils.progress2,
-                    AppUtils.ANIMATION_INTERVAL);
+            loaderContainer.setBackgroundResource(R.drawable.loader2);
+            animateLoader = (AnimationDrawable) loaderContainer.getBackground();
+        } else if (mLoader == 3) {
+            loaderContainer.setBackgroundResource(R.drawable.loader3);
+            animateLoader = (AnimationDrawable) loaderContainer.getBackground();
         }
     }
 
     @Override
     public void show() {
         super.show();
-        if (mFasterAnimationsContainer != null)
-            mFasterAnimationsContainer.start();
+        if (animateLoader != null)
+            animateLoader.start();
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
-        if (mFasterAnimationsContainer != null)
-            mFasterAnimationsContainer.stop();
+        if (animateLoader != null)
+            animateLoader.stop();
     }
 }

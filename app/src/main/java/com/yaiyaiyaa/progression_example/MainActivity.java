@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Button showLoader2;
     private ProgressDialog progression1;
     private ProgressDialog progression2;
+    private Button showLoader3;
+    private ProgressDialog progression3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
         showLoader1 = (Button) findViewById(R.id.show_loader1);
         showLoader2 = (Button) findViewById(R.id.show_loader2);
+        showLoader3 = (Button) findViewById(R.id.show_loader3);
         progression1 = Progression.initProgression(MainActivity.this, 1);
         progression2 = Progression.initProgression(MainActivity.this, 2);
+        progression3 = Progression.initProgression(MainActivity.this, 3);
     }
 
     private void initializeListeners() {
@@ -90,6 +94,34 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+        showLoader3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shoLoader3();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideLoader3();
+                            }
+                        }, 3000);
+                    }
+                });
+            }
+        });
+    }
+
+    private void shoLoader3() {
+        progression3.show();
+    }
+
+    private void hideLoader3() {
+        if(progression3.isShowing())
+            progression3.dismiss();
     }
 
     private void shoLoader2() {
