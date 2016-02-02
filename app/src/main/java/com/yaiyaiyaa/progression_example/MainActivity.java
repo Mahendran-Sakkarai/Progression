@@ -21,10 +21,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Button showLoader1;
     private Button showLoader2;
-    private ProgressDialog progression1;
-    private ProgressDialog progression2;
+    private Progression progression1;
+    private Progression progression2;
     private Button showLoader3;
-    private ProgressDialog progression3;
+    private Progression progression3;
+    private Button showLoader4;
+    private Progression progression4;
+    private Button showLoader5;
+    private Progression progression5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +55,16 @@ public class MainActivity extends AppCompatActivity {
         showLoader1 = (Button) findViewById(R.id.show_loader1);
         showLoader2 = (Button) findViewById(R.id.show_loader2);
         showLoader3 = (Button) findViewById(R.id.show_loader3);
+        showLoader4 = (Button) findViewById(R.id.show_loader4);
+        showLoader5 = (Button) findViewById(R.id.show_loader5);
         progression1 = Progression.initProgression(MainActivity.this, 1);
         progression2 = Progression.initProgression(MainActivity.this, 2);
         progression3 = Progression.initProgression(MainActivity.this, 3);
+        progression4 = Progression.initProgression(MainActivity.this, 4);
+        progression5 = Progression.initProgression(MainActivity.this, 4);
+
+        // set color for loader
+        progression5.setColor(0xFFFFFFFF);
     }
 
     private void initializeListeners() {
@@ -113,6 +124,62 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+        showLoader4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shoLoader4();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideLoader4();
+                            }
+                        }, 3000);
+                    }
+                });
+            }
+        });
+
+        showLoader5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shoLoader5();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideLoader5();
+                            }
+                        }, 3000);
+                    }
+                });
+            }
+        });
+    }
+
+    private void hideLoader5() {
+        if(progression5.isShowing())
+            progression5.dismiss();
+    }
+
+    private void shoLoader5() {
+        progression5.show();
+    }
+
+    private void hideLoader4() {
+        if(progression4.isShowing())
+            progression4.dismiss();
+    }
+
+    private void shoLoader4() {
+        progression4.show();
     }
 
     private void shoLoader3() {
