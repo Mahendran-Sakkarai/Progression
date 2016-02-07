@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private Progression progression4;
     private Button showLoader5;
     private Progression progression5;
+    private Button showLoader6;
+    private Progression progression6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +59,21 @@ public class MainActivity extends AppCompatActivity {
         showLoader3 = (Button) findViewById(R.id.show_loader3);
         showLoader4 = (Button) findViewById(R.id.show_loader4);
         showLoader5 = (Button) findViewById(R.id.show_loader5);
+        showLoader6 = (Button) findViewById(R.id.show_loader6);
         progression1 = Progression.initProgression(MainActivity.this, 1);
         progression2 = Progression.initProgression(MainActivity.this, 2);
         progression3 = Progression.initProgression(MainActivity.this, 3);
         progression4 = Progression.initProgression(MainActivity.this, 4);
         progression5 = Progression.initProgression(MainActivity.this, 4);
+        progression6 = Progression.initProgression(MainActivity.this, 4);
 
         // set color for loader
         progression5.setColor(0xFFFFFFFF);
+
+        // set loader text
+        progression6.setColor(0xFFFFFFFF);
+        progression6.setBackgroundColor(0xFF8fbe2c);
+        progression6.setLoadingText("Loading.. Please Wait..");
     }
 
     private void initializeListeners() {
@@ -162,6 +171,34 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+        showLoader6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shoLoader6();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideLoader6();
+                            }
+                        }, 3000);
+                    }
+                });
+            }
+        });
+    }
+
+    private void hideLoader6() {
+        if(progression6.isShowing())
+            progression6.dismiss();
+    }
+
+    private void shoLoader6() {
+        progression6.show();
     }
 
     private void hideLoader5() {
